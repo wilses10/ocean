@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata: 
+  name: site  
+spec:
+  replicas: 3
+  selector:
+    matchLabels: 
+      web: ocean  
+  template: 
+    metadata:
+      labels: 
+        web: oocean 
+    spec: 
+      containers: 
+        - name: ocean-site 
+          image: wilses10/ocean:latest
+          resources:
+            limits:
+              cpu: 50m
+              memory: 250Mi
+            requests:
+              cpu: 25m
+              memory: 120Mi
+          ports: 
+            - containerPort: 80
+--- 
+apiVersion: v1 
+kind: Service 
+metadata: 
+   name: site    
+spec: 
+  selector: 
+    web: ocean-site  
+  ports:
+    port: 81
+    targetPort: 80 
+    protocol: TCP 
+  type: ClusterIP 
