@@ -10,7 +10,7 @@ spec:
   template: 
     metadata:
       labels: 
-        web: oocean 
+        web: ocean 
     spec: 
       containers: 
         - name: ocean-site 
@@ -24,16 +24,16 @@ spec:
               memory: 120Mi
           ports: 
             - containerPort: 80
---- 
+---
 apiVersion: v1 
 kind: Service 
 metadata: 
-   name: site    
+  name: site    
 spec: 
   selector: 
-    web: ocean-site  
+    web: ocean  
   ports:
-    port: 81
-    targetPort: 80 
-    protocol: TCP 
-  type: ClusterIP 
+    - port: 81
+      targetPort: 80 
+      protocol: TCP 
+  type: ClusterIP
